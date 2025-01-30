@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vintage Vault - Antique Store</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f1ea;
+      color: #4a4a4a;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #f4f1ea;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: #5c3a21;
+    }
+
+    body.dark-mode h1,
+    body.dark-mode h2,
+    body.dark-mode h3 {
+      color: #d4af37;
+    }
+
+    a {
+      color: #5c3a21;
+      text-decoration: none;
+    }
+
+    body.dark-mode a {
+      color: #d4af37;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Header */
+    header {
+      background: url('https://via.placeholder.com/1500x500') no-repeat center center/cover;
+      color: white;
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.5rem;
+      margin: 10px 0 0;
+      color: #5c3a21;
+    }
+
+    body.dark-mode header p {
+      color: #d4af37;
+    }
+
+    /* Navigation */
+    nav {
+      background: #5c3a21;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    body.dark-mode nav {
+      background: #333;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .logo-container h1 {
+      font-size: 1.2rem;
+      color: white;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      font-size: 1rem;
+    }
+
+    /* Sections */
+    section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .about, .services, .gallery, .contact {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about h2, .services h2, .gallery h2, .contact h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .about p, .services p, .contact p {
+      font-size: 1rem;
+      line-height: 1.8;
+      text-align: justify;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* About Section with Video Background */
+    .about {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      padding: 60px 20px;
+    }
+
+    .about::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .about video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+
+    .about .content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .service-item {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    body.dark-mode .service-item {
+      background: #333;
+      color: #f4f1ea;
+    }
+
+    .service-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      padding: 0 20px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Contact Form */
+    .contact form {
+      display: flex;
+      flex-direction: column;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .contact input, .contact textarea, .contact button {
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    body.dark-mode .contact input,
+    body.dark-mode .contact textarea {
+      background: #333;
+      color: #f4f1ea;
+      border-color: #555;
+    }
+
+    .contact textarea {
+      resize: none;
+    }
+
+    .contact button {
+      background: #5c3a21;
+      color: white;
+      cursor: pointer;
+    }
+
+    body.dark-mode .contact button {
+      background: #d4af37;
+      color: #1a1a1a;
+    }
+
+    .contact button:hover {
+      background: #4a2e1a;
+    }
+
+    body.dark-mode .contact button:hover {
+      background: #b8860b;
+    }
+
+    /* Footer */
+    footer {
+      background: #5c3a21;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      width: 100%;
+    }
+
+    body.dark-mode footer {
+      background: #333;
+    }
+
+    footer .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    footer .footer-logo img {
+      height: 40px;
+    }
+
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+
+    footer .footer-links a {
+      color: white;
+      font-size: 1rem;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 100px; /* Moved down */
+      right: 20px;
+      background: #5c3a21;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
+    }
+
+    body.dark-mode .back-to-top {
+      background: #d4af37;
+      color: #1a1a1a;
+    }
+
+    /* Dark Mode Toggle Button */
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px; /* Positioned on the left */
+      background: #5c3a21;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    body.dark-mode .dark-mode-toggle {
+      background: #d4af37;
+      color: #1a1a1a;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1.2rem;
+      }
+
+      nav {
+        flex-direction: column;
+        padding: 10px;
+      }
+
+      .logo-container h1 {
+        font-size: 1rem;
+      }
+
+      nav a {
+        margin: 5px;
+        font-size: 0.9rem;
+      }
+
+      .about h2, .services h2, .gallery h2, .contact h2 {
+        font-size: 1.5rem;
+      }
+
+      .about p, .services p, .contact p {
+        font-size: 0.9rem;
+      }
+
+      .services-grid, .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+
+      .contact form {
+        padding: 0 10px;
+      }
+
+      .back-to-top, .dark-mode-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .back-to-top {
+        bottom: 90px; /* Adjusted for mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo-container">
+      <img src="images/logo.png" alt="Vintage Vault Logo">
+      <h1>Vintage Vault</h1>
+    </div>
+    <div>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <h1>Vintage Vault</h1>
+    <p>Discover Timeless Treasures</p>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <video autoplay muted loop>
+      <source src="videos/video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="content">
+      <h2>About Us</h2>
+      <p>Welcome to Vintage Vault, your premier destination for unique and timeless antiques. Our collection spans centuries, offering everything from vintage furniture to rare collectibles. Each piece has a story to tell, and we’re here to help you find the perfect addition to your home or collection.</p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <h3>Antique Restoration</h3>
+        <p>We specialize in restoring antiques to their former glory, preserving their history and beauty.</p>
+      </div>
+      <div class="service-item">
+        <h3>Appraisals</h3>
+        <p>Get expert appraisals for your antiques to understand their value and history.</p>
+      </div>
+      <div class="service-item">
+        <h3>Custom Finds</h3>
+        <p>Looking for something specific? We’ll help you find the perfect piece for your collection.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery-grid">
+      <img src="images/gallery1.jpg" alt="Antique 1">
+      <img src="images/gallery2.jpg" alt="Antique 2">
+      <img src="images/gallery3.jpg" alt="Antique 3">
+      <img src="images/gallery4.jpg" alt="Antique 4">
+      <img src="images/gallery5.jpg" alt="Antique 5">
+      <img src="images/gallery6.jpg" alt="Antique 6">
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="images/logo.png" alt="Vintage Vault Logo">
+      </div>
+      <div class="footer-links">
+        <a href="privacy-terms.html">Privacy Policy</a>
+        <a href="privacy-terms.html">Terms of Service</a>
+      </div>
+      <p>&copy; 2023 Vintage Vault. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" onclick="scrollToTop()">🔼</button>
+
+  <!-- Dark Mode Toggle Button -->
+  <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+
+  <!-- JavaScript -->
+  <script>
+    // Back to Top Button
+    const backToTopButton = document.querySelector('.back-to-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopButton.style.display = 'block';
+      } else {
+        backToTopButton.style.display = 'none';
+      }
+    });
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
+
+    // Dark Mode Toggle
+    function toggleDarkMode() {
+      const body = document.body;
+      const darkModeToggle = document.querySelector('.dark-mode-toggle');
+
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        darkModeToggle.textContent = '☀️';
+      } else {
+        darkModeToggle.textContent = '🌙';
+      }
+    }
+
+    // Form Submission Handling
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      if (name && email && message) {
+        alert(`Thank you, ${name}! Your message has been sent.`);
+        document.getElementById('contactForm').reset();
+      } else {
+        alert('Please fill out all fields.');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy & Terms of Service - Vintage Vault</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f1ea;
+      color: #4a4a4a;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #f4f1ea;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: #5c3a21;
+    }
+
+    body.dark-mode h1,
+    body.dark-mode h2,
+    body.dark-mode h3 {
+      color: #d4af37;
+    }
+
+    a {
+      color: #5c3a21;
+      text-decoration: none;
+    }
+
+    body.dark-mode a {
+      color: #d4af37;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Navigation */
+    nav {
+      background: #5c3a21;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    body.dark-mode nav {
+      background: #333;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .logo-container h1 {
+      font-size: 1.2rem;
+      color: white;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      font-size: 1rem;
+    }
+
+    /* Content */
+    .content {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: justify;
+    }
+
+    .content h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .content h3 {
+      font-size: 1.5rem;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+
+    .content p {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .content ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    .content ul li {
+      margin-bottom: 10px;
+    }
+
+    /* Footer */
+    footer {
+      background: #5c3a21;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      width: 100%;
+    }
+
+    body.dark-mode footer {
+      background: #333;
+    }
+
+    footer .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    footer .footer-logo img {
+      height: 40px;
+    }
+
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+
+    footer .footer-links a {
+      color: white;
+      font-size: 1rem;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background: #5c3a21;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
+    }
+
+    body.dark-mode .back-to-top {
+      background: #d4af37;
+      color: #1a1a1a;
+    }
+
+    /* Dark Mode Toggle Button */
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px; /* Moved to the left side */
+      background: #5c3a21;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    body.dark-mode .dark-mode-toggle {
+      background: #d4af37;
+      color: #1a1a1a;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        padding: 10px;
+      }
+
+      .logo-container h1 {
+        font-size: 1rem;
+      }
+
+      nav a {
+        margin: 5px;
+        font-size: 0.9rem;
+      }
+
+      .content h2 {
+        font-size: 1.5rem;
+      }
+
+      .content h3 {
+        font-size: 1.2rem;
+      }
+
+      .content p {
+        font-size: 0.9rem;
+      }
+
+      .back-to-top, .dark-mode-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .back-to-top {
+        bottom: 70px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo-container">
+      <img src="images/logo.png" alt="Vintage Vault Logo">
+      <h1>Vintage Vault</h1>
+    </div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="content">
+    <h2>Privacy Policy</h2>
+    <p>
+      Your privacy is important to us. This Privacy Policy explains how Vintage Vault collects, uses, and protects your personal information. We are committed to ensuring that your privacy is protected.
+    </p>
+
+    <h3>Information We Collect</h3>
+    <p>
+      We may collect the following information:
+    </p>
+    <ul>
+      <li>Name</li>
+      <li>Contact information, including email address</li>
+      <li>Demographic information such as postcode, preferences, and interests</li>
+      <li>Other information relevant to customer surveys and/or offers</li>
+    </ul>
+
+    <h3>How We Use Your Information</h3>
+    <p>
+      We use this information to understand your needs and provide you with better service, and in particular for the following reasons:
+    </p>
+    <ul>
+      <li>Internal record keeping</li>
+      <li>Improving our products and services</li>
+      <li>Sending promotional emails about new products, special offers, or other information we think you may find interesting</li>
+      <li>Contacting you for market research purposes</li>
+    </ul>
+
+    <h3>Security</h3>
+    <p>
+      We are committed to ensuring that your information is secure. To prevent unauthorized access or disclosure, we have put in place suitable physical, electronic, and managerial procedures to safeguard and secure the information we collect online.
+    </p>
+
+    <h2>Terms of Service</h2>
+    <p>
+      By using our website, you agree to comply with and be bound by the following terms and conditions of use. If you disagree with any part of these terms, please do not use our website.
+    </p>
+
+    <h3>Use of Website</h3>
+    <p>
+      The content of the pages of this website is for your general information and use only. It is subject to change without notice.
+    </p>
+
+    <h3>Limitations of Liability</h3>
+    <p>
+      Vintage Vault shall not be liable for any damages arising out of or in connection with the use of this website. This includes, without limitation, direct loss, loss of business or profits, or any other indirect or consequential loss.
+    </p>
+
+    <h3>Changes to Terms</h3>
+    <p>
+      We may revise these terms of service at any time without notice. By using this website, you are agreeing to be bound by the then-current version of these terms of service.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="images/logo.png" alt="Vintage Vault Logo">
+      </div>
+      <div class="footer-links">
+        <a href="privacy-terms.html">Privacy Policy</a>
+        <a href="privacy-terms.html">Terms of Service</a>
+      </div>
+      <p>&copy; 2023 Vintage Vault. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" onclick="scrollToTop()">🔼</button>
+
+  <!-- Dark Mode Toggle Button -->
+  <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+
+  <!-- JavaScript -->
+  <script>
+    // Back to Top Button
+    const backToTopButton = document.querySelector('.back-to-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopButton.style.display = 'block';
+      } else {
+        backToTopButton.style.display = 'none';
+      }
+    });
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
+
+    // Dark Mode Toggle
+    function toggleDarkMode() {
+      const body = document.body;
+      const darkModeToggle = document.querySelector('.dark-mode-toggle');
+
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        darkModeToggle.textContent = '☀️';
+      } else {
+        darkModeToggle.textContent = '🌙';
+      }
+    }
+  </script>
+</body>
+</html>
