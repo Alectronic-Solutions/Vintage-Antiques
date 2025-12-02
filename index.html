@@ -1,183 +1,1540 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vintage Vault - Antique Store</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Vault | Curated Antiques & Collectibles</title>
+    <meta name="description" content="Discover timeless treasures at Vintage Vault. We curate rare antiques, vintage furniture, and historical artifacts.">
+    
+    <!-- FAVICON LINK -->
+    <link rel="icon" href="portfolio-17.png" type="image/png">
+    <!-- Fallback if the image isn't found/supported (generic icon) -->
+    <link rel="alternate icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/gem.svg" type="image/svg+xml">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.vintagevault.com/">
+    <meta property="og:title" content="Vintage Vault | Curated Antiques">
+    <meta property="og:description" content="Discover timeless treasures at Vintage Vault. Rare antiques and historical artifacts.">
+    <meta property="og:image" content="portfolio-17.jpg">
+
+    <!-- Fonts: Poppins (Headings) and Roboto (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons: FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES (Light Mode Default) --- */
+        :root {
+            /* Palette - Light Mode */
+            --primary: #D4AF37;       /* Metallic Gold */
+            --primary-hover: #B5952F; /* Darker Gold */
+            --accent: #CD7F32;        /* Bronze */
+            
+            --bg-body: #FAFAFA;       /* Clean Off-White */
+            --bg-card: #FFFFFF;       /* Pure White */
+            --bg-overlay: rgba(255, 255, 255, 0.95);
+            
+            --text-main: #2C2C2C;     /* Dark Charcoal for readability */
+            --text-muted: #666666;    /* Medium Gray */
+            --text-light: #F5F5F5;    /* Keep for dark backgrounds like hero */
+            
+            --border-color: rgba(0, 0, 0, 0.08);
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.1);
+
+            /* Spacing & Layout */
+            --container-width: 1200px;
+            --header-height: 90px;
+            --border-radius: 8px;
+            
+            /* Transitions */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- DARK MODE VARIABLES --- */
+        body.dark-mode {
+            --bg-body: #121212;
+            --bg-card: #1E1E1E;
+            --bg-overlay: rgba(18, 18, 18, 0.95);
+            
+            --text-main: #F5F5F5;
+            --text-muted: #B0B0B0;
+            
+            --border-color: rgba(255, 255, 255, 0.08);
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Responsive Typography using clamp() */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); }
+        h3 { font-size: clamp(1.35rem, 2vw, 1.6rem); }
+        
+        p {
+            font-size: clamp(1rem, 2vw, 1.05rem); 
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 34px;
+            border: 2px solid var(--primary);
+            background-color: transparent;
+            color: var(--primary);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .btn:hover, .btn:focus {
+            background-color: var(--primary);
+            color: #FFFFFF;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-filled {
+            background-color: var(--primary);
+            color: #FFFFFF;
+        }
+
+        .btn-filled:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+        
+        @media (max-width: 768px) {
+            section { padding: 60px 0; }
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--bg-overlay);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img-icon {
+            height: 45px;
+            width: auto;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Main Navigation Wrapper */
+        header nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main);
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 5px 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Cart Icon in Header */
+        .cart-icon-wrapper {
+            position: relative;
+            cursor: pointer;
+            margin-left: 25px; /* Added spacing from nav menu */
+            color: var(--text-main);
+            font-size: 1.25rem;
+            transition: var(--transition);
+            padding: 8px; /* Easier to click */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .cart-icon-wrapper:hover {
+            color: var(--primary);
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            transition: color 0.3s;
+            padding: 10px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            min-height: 600px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        @media (hover: none) and (pointer: coarse) {
+            .hero { background-attachment: scroll; }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            padding: 40px 20px;
+        }
+
+        .hero h1 {
+            color: #FFFFFF;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            display: block;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- CATEGORIES / SERVICES --- */
+        .categories {
+            background-color: var(--bg-body);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        @media (max-width: 600px) {
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .category-card {
+            background-color: var(--bg-card);
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            box-shadow: var(--shadow-card);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            opacity: 0.8;
+        }
+
+        .category-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- FEATURED COLLECTION (Grid) --- */
+        .featured {
+            background-color: var(--bg-body);
+            padding-top: 50px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        @media (max-width: 600px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .product-card {
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-color);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card.hidden-item {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .product-card.reveal-item {
+            display: flex;
+            animation: fadeInSlide 0.6s forwards;
+        }
+        
+        @keyframes fadeInSlide {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-8px);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            background-color: #f0f0f0;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.08);
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .quick-view-btn {
+            background-color: #fff;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s 0.1s;
+        }
+
+        .product-card:hover .quick-view-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .product-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--accent);
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            display: block;
+        }
+
+        .product-title {
+            font-size: 1.15rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .price {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 1.1rem;
+        }
+
+        .add-cart {
+            background: none;
+            border: 1px solid var(--border-color);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .add-cart:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--primary);
+            border-radius: var(--border-radius);
+            z-index: 0;
+        }
+
+        .about-image img {
+            position: relative;
+            z-index: 1;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-card);
+        }
+
+        /* --- MODALS --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.open {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: var(--bg-card);
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal.open .modal-content {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        .modal-header h3 {
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .cart-item-price {
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .cart-total {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: right;
+            color: var(--text-main);
+        }
+
+        .modal-body p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* --- FOOTER NEWSLETTER --- */
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .newsletter-form input {
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            border-radius: 4px 0 0 4px;
+            flex: 1;
+            outline: none;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem; /* Prevent zoom on mobile */
+        }
+        
+        .newsletter-form input:focus {
+            border-color: var(--primary);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .newsletter-form button {
+            padding: 10px 20px;
+            background: var(--primary);
+            border: 1px solid var(--primary);
+            color: #fff;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--primary-hover);
+            border-color: var(--primary-hover);
+        }
+
+        /* --- FLOATING BUTTONS --- */
+        .floating-btn {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 9999;
+            font-size: 1.2rem;
+            touch-action: manipulation; 
+        }
+
+        .floating-btn:hover {
+            background-color: var(--primary);
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        #theme-toggle {
+            bottom: 30px;
+            left: 30px;
+        }
+
+        #back-to-top {
+            bottom: 30px;
+            right: 30px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #0A0A0A; /* Always dark for footer */
+            color: #F5F5F5;
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            color: #FFFFFF;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #999;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary);
+            padding-left: 8px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* COPYRIGHT LINK HIGHLIGHT */
+        .copyright a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .copyright a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+            text-decoration: underline;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .about-container {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: var(--header-height);
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - var(--header-height));
+                background-color: var(--bg-card);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s ease-in-out;
+                border-top: 1px solid var(--border-color);
+                padding-bottom: 50px; /* Space for scrolling */
+                overflow-y: auto;
+                gap: 25px; /* Adjust gap for mobile menu */
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+            }
+            
+            .nav-link {
+                font-size: 1.1rem; /* Bigger text for mobile touch */
+            }
+            
+            /* Adjust cart spacing on mobile menu */
+            .cart-icon-wrapper {
+                 margin-left: 0;
+                 margin-top: 20px;
+            }
+
+            .about-container {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                width: 100%;
+                margin-top: 20px;
+            }
+
+            .about-image::before {
+                top: -15px;
+                left: -15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 20px 15px;
+            }
+            
+            /* Full width buttons on mobile */
+            .hero .btn {
+                width: 100%;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+            
+            .hero div {
+                flex-direction: column;
+                gap: 10px !important;
+            }
+            
+            .floating-btn {
+                width: 45px;
+                height: 45px;
+            }
+            
+            #theme-toggle { left: 20px; bottom: 20px; }
+            #back-to-top { right: 20px; bottom: 20px; }
+        }
+    </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav>
-    <div class="logo-container">
-      <img src="images/logo.png" alt="Vintage Vault Logo">
-      <h1>Vintage Vault</h1>
-    </div>
-    <div class="nav-links">
-      <a href="#about"><i class="fas fa-info-circle"></i> <span>About</span></a>
-      <a href="#services"><i class="fas fa-cog"></i> <span>Services</span></a>
-      <a href="#gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
-      <a href="#contact"><i class="fas fa-envelope"></i> <span>Contact</span></a>
-    </div>
-  </nav>
 
-  <!-- Header -->
-  <header>
-    <video autoplay muted loop playsinline class="hero-video">
-      <source src="videos/video.mp4" type="video/mp4">
-    </video>
-    <div class="hero-content">
-      <h1>Vintage Vault</h1>
-      <p>Discover Timeless Treasures</p>
-    </div>
-  </header>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="portfolio-17.jpg" alt="Logo" class="logo-img-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block'">
+                <i class="fa-solid fa-gem" style="display:none;"></i> 
+                <span>VINTAGE VAULT</span>
+            </a>
+            
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#featured" class="nav-link">Collection</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="btn btn-filled" style="padding: 10px 25px; font-size: 0.8rem;">Contact</a></li>
+                </ul>
+                
+                <!-- Cart Icon -->
+                <div class="cart-icon-wrapper" id="cart-btn" aria-label="Open Shopping Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </div>
+            </nav>
 
-  <!-- About Section -->
-  <section id="about" class="about">
-    <div class="content">
-      <h2>About Us</h2>
-      <p>Welcome to Vintage Vault, your premier destination for unique and timeless antiques. Our collection spans centuries, offering everything from vintage furniture to rare collectibles. Each piece has a story to tell, and we’re here to help you find the perfect addition to your home or collection.</p>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section id="services" class="services">
-    <h2>Our Services</h2>
-    <div class="services-grid">
-      <div class="service-item">
-        <h3>Antique Restoration</h3>
-        <p>We specialize in restoring antiques to their former glory, preserving their history and beauty.</p>
-      </div>
-      <div class="service-item">
-        <h3>Appraisals</h3>
-        <p>Get expert appraisals for your antiques to understand their value and history.</p>
-      </div>
-      <div class="service-item">
-        <h3>Custom Finds</h3>
-        <p>Looking for something specific? We’ll help you find the perfect piece for your collection.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Gallery Section -->
-  <section id="gallery" class="gallery">
-    <h2>Our Collection</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="images/gallery1.jpg" alt="Antique 1">
-      </div>
-      <div class="gallery-item">
-        <img src="images/gallery2.jpg" alt="Antique 2">
-      </div>
-      <div class="gallery-item">
-        <img src="images/gallery3.jpg" alt="Antique 3">
-      </div>
-      <div class="gallery-item">
-        <img src="images/gallery4.jpg" alt="Antique 4">
-      </div>
-      <div class="gallery-item">
-        <img src="images/gallery5.jpg" alt="Antique 5">
-      </div>
-      <div class="gallery-item">
-        <img src="images/gallery6.jpg" alt="Antique 6">
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="contact">
-    <h2>Contact Us</h2>
-    <form id="contactForm">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="email" id="email" placeholder="Your Email" required>
-      <textarea id="message" placeholder="Your Message" required></textarea>
-      <button type="submit">
-        <i class="fas fa-paper-plane"></i> Send Message
-      </button>
-    </form>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-info">
-        <img src="images/logo.png" alt="Vintage Vault Logo">
-        <p>Preserving history through carefully curated antiques and collectibles. Each piece tells a unique story of craftsmanship and heritage.</p>
-        <div class="footer-social">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <div class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </div>
         </div>
-      </div>
-      <div class="footer-links">
-        <h3>Quick Links</h3>
-        <a href="#about">About Us</a>
-        <a href="#services">Our Services</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact">Contact</a>
-        <a href="#" onclick="openModal('privacy')">Privacy Policy</a>
-        <a href="#" onclick="openModal('terms')">Terms of Service</a>
-      </div>
-      <div class="footer-contact">
-        <h3>Get in Touch</h3>
-        <p><i class="fas fa-map-marker-alt"></i> 123 Antique Street, City</p>
-        <p><i class="fas fa-phone"></i> (555) 123-4567</p>
-        <p><i class="fas fa-envelope"></i> info@vintagevault.com</p>
-        <p><i class="fas fa-clock"></i> Mon-Sat: 10:00 AM - 6:00 PM</p>
-      </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="container hero-content">
+                <h1>Timeless History <br> <span>Captured in Gold</span></h1>
+                <p>Explore our curated collection of rare antiques, restored furniture, and historical artifacts. Discover the perfect piece for your collection.</p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="#featured" class="btn btn-filled">Shop Collection</a>
+                    <a href="#about" class="btn" style="color: #fff; border-color: #fff;">Our Story</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services / Categories -->
+        <section id="services" class="categories">
+            <div class="container">
+                <h2 class="section-title">Our Expertise</h2>
+                <div class="category-grid">
+                    <article class="category-card">
+                        <i class="fa-solid fa-chair category-icon"></i>
+                        <h3>Furniture Restoration</h3>
+                        <p>We breathe new life into centuries-old wood and upholstery, maintaining the integrity of the original craftsmanship.</p>
+                    </article>
+                    <article class="category-card">
+                        <i class="fa-solid fa-magnifying-glass category-icon"></i>
+                        <h3>Expert Appraisals</h3>
+                        <p>Our certified historians provide accurate valuations for your heirlooms based on current market trends and rarity.</p>
+                    </article>
+                    <article class="category-card">
+                        <i class="fa-solid fa-truck-fast category-icon"></i>
+                        <h3>White-Glove Shipping</h3>
+                        <p>Secure, insured delivery service ensures your fragile treasures arrive at your doorstep in pristine condition.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Collection -->
+        <section id="featured" class="featured">
+            <div class="container">
+                <h2 class="section-title">Curated Arrivals</h2>
+                <div class="product-grid" id="product-grid">
+                    <!-- Product 1: Vintage Globe -->
+                    <article class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=600&q=80" alt="1920s World Globe">
+                            <div class="product-overlay">
+                                <span class="quick-view-btn">Quick View</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Decor</span>
+                            <h3 class="product-title">1920s Desktop Globe</h3>
+                            <div class="product-footer">
+                                <span class="price">$350</span>
+                                <button class="add-cart" data-name="1920s Desktop Globe" data-price="350" data-img="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=600&q=80" aria-label="Add to cart"><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product 2: Antique Hourglass (Replaced Microscope) -->
+                    <article class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=600&q=80" alt="Antique Hourglass">
+                            <div class="product-overlay">
+                                <span class="quick-view-btn">Quick View</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Decor</span>
+                            <h3 class="product-title">19th Century Brass Hourglass</h3>
+                            <div class="product-footer">
+                                <span class="price">$550</span>
+                                <button class="add-cart" data-name="19th Century Brass Hourglass" data-price="550" data-img="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=600&q=80" aria-label="Add to cart"><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product 3: Turntable -->
+                    <article class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=600&q=80" alt="Vintage Turntable">
+                            <div class="product-overlay">
+                                <span class="quick-view-btn">Quick View</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Music</span>
+                            <h3 class="product-title">Restored Hi-Fi Turntable</h3>
+                            <div class="product-footer">
+                                <span class="price">$425</span>
+                                <button class="add-cart" data-name="Restored Hi-Fi Turntable" data-price="425" data-img="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=600&q=80" aria-label="Add to cart"><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product 4: Brass Compass -->
+                    <article class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=600&q=80" alt="Brass Compass">
+                            <div class="product-overlay">
+                                <span class="quick-view-btn">Quick View</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Nautical</span>
+                            <h3 class="product-title">Captain's Brass Compass</h3>
+                            <div class="product-footer">
+                                <span class="price">$225</span>
+                                <button class="add-cart" data-name="Captain's Brass Compass" data-price="225" data-img="https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=600&q=80" aria-label="Add to cart"><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- HIDDEN ITEMS (Revealed on click) -->
+                    <!-- Product 5: Suitcase -->
+                    <article class="product-card hidden-item">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1505506874110-6a7a69069a08?auto=format&fit=crop&w=600&q=80" alt="Leather Suitcase">
+                            <div class="product-overlay">
+                                <span class="quick-view-btn">Quick View</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Travel</span>
+                            <h3 class="product-title">Leather Travel Suitcase</h3>
+                            <div class="product-footer">
+                                <span class="price">$200</span>
+                                <button class="add-cart" data-name="Leather Travel Suitcase" data-price="200" data-img="https://images.unsplash.com/photo-1505506874110-6a7a69069a08?auto=format&fit=crop&w=600&q=80" aria-label="Add to cart"><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product 6: Vintage Radio -->
+                    <article class="product-card hidden-item">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=600&q=80" alt="Vintage Wooden Radio">
+                            <div class="product-overlay">
+                                <span class="quick-view-btn">Quick View</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Electronics</span>
+                            <h3 class="product-title">1940s Wooden Radio</h3>
+                            <div class="product-footer">
+                                <span class="price">$550</span>
+                                <button class="add-cart" data-name="1940s Wooden Radio" data-price="550" data-img="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=600&q=80" aria-label="Add to cart"><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product 7: Skeleton Keys (Replaced Wax Seal) -->
+                    <article class="product-card hidden-item">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=600&q=80" alt="Vintage Skeleton Keys">
+                            <div class="product-overlay">
+                                <span class="quick-view-btn">Quick View</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Collectibles</span>
+                            <h3 class="product-title">Iron Skeleton Key Set</h3>
+                            <div class="product-footer">
+                                <span class="price">$145</span>
+                                <button class="add-cart" data-name="Iron Skeleton Key Set" data-price="145" data-img="https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=600&q=80" aria-label="Add to cart"><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                     <!-- Product 8: Oil Lantern (Replaced Sextant) -->
+                     <article class="product-card hidden-item">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80" alt="Antique Oil Lantern">
+                            <div class="product-overlay">
+                                <span class="quick-view-btn">Quick View</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Lighting</span>
+                            <h3 class="product-title">Antique Oil Lantern</h3>
+                            <div class="product-footer">
+                                <span class="price">$180</span>
+                                <button class="add-cart" data-name="Antique Oil Lantern" data-price="180" data-img="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80" aria-label="Add to cart"><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+                <div style="text-align: center; margin-top: 60px;">
+                    <button id="load-more-btn" class="btn">View Full Catalog</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="container about-container">
+                <div class="about-text">
+                    <span style="color: var(--primary); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 10px;">Est. 1985</span>
+                    <h2>Preserving the Past <br> for the Future</h2>
+                    <p>Founded in 1985, Vintage Vault began as a small passion project in a dusty London basement. Today, we are a global destination for serious collectors and interior designers alike.</p>
+                    <p>We believe that every object has a soul and a story to tell. Our dedicated team of historians and restorers works tirelessly to ensure that these stories continue to be told for generations to come.</p>
+                    <a href="#contact" class="btn btn-filled">Visit Our Showroom</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Vintage Vault Showroom Interior">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="margin-bottom: 20px; display: inline-block; color: #fff;">
+                        <!-- Logo in Footer also uses image -->
+                         <div style="display:flex; align-items:center; gap: 10px;">
+                             <img src="portfolio-17.jpg" style="height:30px; width:auto; border-radius:50%;" alt="">
+                             <span>VINTAGE VAULT</span>
+                         </div>
+                    </a>
+                    <p style="color: #999; line-height: 1.8; margin-top: 15px;">123 Heritage Lane<br>New York, NY 10012<br>USA</p>
+                    <p style="color: #999; margin-top: 10px;"><i class="fa-solid fa-phone" style="margin-right: 8px; color: var(--primary);"></i> +1 (555) 123-4567</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Furniture</a></li>
+                        <li><a href="#">Art & Decor</a></li>
+                        <li><a href="#">Jewelry</a></li>
+                        <li><a href="#">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#" class="info-link" data-title="About Us" data-content="Vintage Vault has been the premier destination for antiques since 1985. We are dedicated to quality, authenticity, and history.">About Us</a></li>
+                        <li><a href="#" class="info-link" data-title="Restoration Services" data-content="Our master craftsmen offer museum-quality restoration for furniture, ceramics, and clocks. We use period-correct methods and materials to preserve the integrity of your pieces. Contact us for a consultation.">Restoration Services</a></li>
+                        <li><a href="#" class="info-link" data-title="Sell Your Items" data-content="We are always looking to acquire exceptional pieces. If you have a collection or individual item you wish to sell, please visit our showroom or email photos to acquisitions@vintagevault.com for a preliminary valuation.">Sell Your Items</a></li>
+                        <li><a href="#" class="info-link" data-title="Privacy Policy" data-content="Your privacy is important to us. We collect minimal data to process your orders and improve your experience. We do not sell your personal information to third parties.">Privacy Policy</a></li>
+                        <li><a href="#" class="info-link" data-title="Terms of Service" data-content="By using our website, you agree to our terms. All vintage items are sold 'as is'. We guarantee authenticity to the best of our knowledge. Returns are accepted within 14 days for store credit only.">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <p style="color: #999; margin-bottom: 15px;">Join our newsletter for weekly finds.</p>
+                    
+                    <!-- Newsletter Form -->
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed to the newsletter!');">
+                        <input type="email" placeholder="Your email address..." required aria-label="Email Address">
+                        <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-arrow-right"></i></button>
+                    </form>
+
+                    <div class="social-links" style="margin-top: 20px;">
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>
+                    <a href="https://alectronic-solutions.github.io/" target="_blank" rel="noopener noreferrer">
+                        &copy; 2025 Alectronic Solutions. All rights reserved.
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h3>Your Cart</h3>
+            </div>
+            <div class="modal-body" id="cart-items-container">
+                <p>Your cart is empty.</p>
+            </div>
+            <div class="modal-footer" style="margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 15px;">
+                <div class="cart-total">Total: $<span id="cart-total-price">0</span></div>
+                <button class="btn btn-filled" id="checkout-btn" style="width: 100%; margin-top: 15px;">Checkout</button>
+            </div>
+        </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2023 Vintage Vault. All rights reserved.</p>
-      <p>Designed by <a href="https://alectronic-solutions.github.io/" target="_blank" rel="noopener">Alectronic Solutions</a></p>
+
+    <!-- Info Modal (For Footer Links) -->
+    <div id="info-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h3 id="info-modal-title">Title</h3>
+            </div>
+            <div class="modal-body">
+                <p id="info-modal-content">Content goes here...</p>
+            </div>
+        </div>
     </div>
-  </footer>
 
-  <!-- Modals -->
-  <div id="privacyModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('privacy')">&times;</span>
-      <h2>Privacy Policy</h2>
-      <div class="modal-body">
-        <h3>Information We Collect</h3>
-        <p>We may collect the following information:</p>
-        <ul>
-          <li>Name</li>
-          <li>Contact information, including email address</li>
-          <li>Demographic information such as postcode, preferences, and interests</li>
-          <li>Other information relevant to customer surveys and/or offers</li>
-        </ul>
-        <!-- ...rest of privacy content... -->
-      </div>
-    </div>
-  </div>
+    <!-- Floating Buttons -->
+    <button id="theme-toggle" class="floating-btn" aria-label="Toggle Dark Mode">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+    
+    <button id="back-to-top" class="floating-btn" aria-label="Back to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
 
-  <div id="termsModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('terms')">&times;</span>
-      <h2>Terms of Service</h2>
-      <div class="modal-body">
-        <p>By using our website, you agree to comply with and be bound by the following terms and conditions of use.</p>
-        <!-- ...rest of terms content... -->
-      </div>
-    </div>
-  </div>
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const header = document.querySelector('header');
+            const themeToggle = document.getElementById('theme-toggle');
+            const backToTopBtn = document.getElementById('back-to-top');
+            const body = document.body;
+            const loadMoreBtn = document.getElementById('load-more-btn');
 
-  <!-- Back to Top Button -->
-  <button class="back-to-top" onclick="scrollToTop()">
-    <i class="fas fa-arrow-up"></i>
-  </button>
+            // --- Cart Logic ---
+            let cart = [];
+            const cartBtn = document.getElementById('cart-btn');
+            const cartModal = document.getElementById('cart-modal');
+            const cartCount = document.getElementById('cart-count');
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartTotalPrice = document.getElementById('cart-total-price');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const closeModals = document.querySelectorAll('.close-modal');
 
-  <!-- Dark Mode Toggle Button -->
-  <button class="dark-mode-toggle" onclick="toggleDarkMode()">
-    <i class="fas fa-moon"></i>
-  </button>
+            // Add to Cart
+            document.querySelectorAll('.add-cart').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    // Slight animation on click
+                    this.innerHTML = '<i class="fa-solid fa-check"></i>';
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fa-solid fa-cart-shopping"></i>';
+                    }, 1000);
 
-  <!-- JavaScript -->
-  <script src="script.js"></script>
+                    const product = {
+                        name: this.getAttribute('data-name'),
+                        price: parseInt(this.getAttribute('data-price')),
+                        img: this.getAttribute('data-img')
+                    };
+                    
+                    cart.push(product);
+                    updateCartUI();
+                });
+            });
+
+            function updateCartUI() {
+                cartCount.textContent = cart.length;
+                
+                // Calculate Total
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                cartTotalPrice.textContent = total.toLocaleString();
+
+                // Render Items
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p>Your cart is currently empty.</p>';
+                } else {
+                    cartItemsContainer.innerHTML = cart.map(item => `
+                        <div class="cart-item">
+                            <img src="${item.img}" alt="${item.name}">
+                            <div class="cart-item-details">
+                                <div class="cart-item-title">${item.name}</div>
+                                <div class="cart-item-price">$${item.price.toLocaleString()}</div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            // Open Cart Modal
+            cartBtn.addEventListener('click', () => {
+                cartModal.classList.add('open');
+                updateCartUI();
+            });
+
+            // Checkout
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    alert("Your cart is empty!");
+                    return;
+                }
+                alert("Thank you for your purchase! Your order is being processed.");
+                cart = [];
+                updateCartUI();
+                cartModal.classList.remove('open');
+            });
+
+            // --- Footer Info Modals ---
+            const infoModal = document.getElementById('info-modal');
+            const infoTitle = document.getElementById('info-modal-title');
+            const infoContent = document.getElementById('info-modal-content');
+
+            document.querySelectorAll('.info-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const title = link.getAttribute('data-title');
+                    const content = link.getAttribute('data-content');
+                    
+                    infoTitle.textContent = title;
+                    infoContent.textContent = content;
+                    
+                    infoModal.classList.add('open');
+                });
+            });
+
+            // --- Generic Modal Closing Logic ---
+            closeModals.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.modal').forEach(m => m.classList.remove('open'));
+                });
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal')) {
+                    e.target.classList.remove('open');
+                }
+            });
+
+            // --- Mobile Menu Logic ---
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                
+                const icon = hamburger.querySelector('i');
+                if (navMenu.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    const icon = hamburger.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+
+            // --- Sticky Header Logic ---
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+                    header.style.height = '70px'; // Slight shrink for effect
+                } else {
+                    header.style.boxShadow = 'none';
+                    header.style.height = 'var(--header-height)';
+                }
+            });
+
+            // --- Dark Mode Logic ---
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            }
+
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                
+                if (body.classList.contains('dark-mode')) {
+                    themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+
+            // --- Back to Top Logic ---
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // --- View Full Catalog Logic ---
+            loadMoreBtn.addEventListener('click', function() {
+                const hiddenItems = document.querySelectorAll('.hidden-item');
+                
+                hiddenItems.forEach((item, index) => {
+                    // Stagger the reveal slightly for visual effect
+                    setTimeout(() => {
+                        item.classList.remove('hidden-item');
+                        item.classList.add('reveal-item');
+                    }, index * 100); 
+                });
+                
+                // Hide the button and show a "End of Catalog" message or just hide
+                this.style.display = 'none';
+                
+                // Optional: Create a "End of Catalog" message
+                const msg = document.createElement('p');
+                msg.textContent = "Showing all available items.";
+                msg.style.color = "var(--text-muted)";
+                msg.style.marginTop = "20px";
+                this.parentElement.appendChild(msg);
+            });
+        });
+    </script>
 </body>
 </html>
